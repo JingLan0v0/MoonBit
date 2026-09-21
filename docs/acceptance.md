@@ -2,7 +2,9 @@
 
 ## 状态
 
-2026-09-21：Windows 本地实现和测试已具备验收演示条件；这不是主办方的通过证明。仓库公开/远程同步、Linux CI、正式章程复核、报名、入群和官方验收尚需完成或确认。
+2026-09-21：Windows 本地与干净目录复现全部通过，公开仓库已同步，Linux 远程 CI 已通过。工程已具备验收演示条件；这不是主办方的通过证明。正式章程复核、报名、入群和官方验收尚需完成或确认。
+
+远程验证记录：[GitHub Actions](https://github.com/JingLan0v0/MoonBit/actions/runs/35584063766)。验证对应 609b140；后续材料更新不改变产品算法。
 
 ## 一次复现
 
@@ -11,7 +13,7 @@
 3. 查看 `artifacts/integration-results.json`、`artifacts/catalog.json` 和两种可读报告。
 4. 独立运行商品主样例，检查一增一删一改两条不变，以及成功差异的退出码 1。
 
-生成物不进入 Git 源码树；运行脚本会生成 `dist` 和 `artifacts`。当前仓库尚未公开时，应先解决公开访问，不能仅提交本地路径。
+生成物不进入 Git 源码树；运行脚本会生成 `dist` 和 `artifacts`。公开源码位于 https://github.com/JingLan0v0/MoonBit 。便携交付包另包含已构建的 `dist/moonrow.cjs`，只需 Node.js 即可演示。
 
 ## 证据对应表
 
@@ -24,8 +26,8 @@
 | 可复现 | `toolchain.json`、构建/验证脚本、`docs/verification-windows.json` |
 | 可维护和可解释 | `docs/architecture.md`、`limitations.md`、`ai-assistance.md` |
 | 开源合规 | LICENSE、NOTICE、THIRD_PARTY_NOTICES.md |
-| 过程记录 | 本地 Git 的真实阶段 commits、CHANGELOG；远程记录待同步 |
-| 公开仓库/Issues/PR | 用户提供地址，远程访问与后续过程记录待完善 |
+| 过程记录 | 本地与远程均保留真实阶段 commits、CHANGELOG |
+| 公开仓库/Issues/PR | 仓库已公开，主代码已同步；后续实际需求和缺陷再形成 Issues/PR，不伪造历史 |
 | 申报/入群/支持 | 需要实际回执和用户确认，不能从代码推定 |
 
 ## 五分钟演示

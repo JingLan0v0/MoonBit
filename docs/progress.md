@@ -20,20 +20,20 @@
 - 已从 fea341c 的 Git 源码导出到独立干净目录重新构建，18 组 MoonBit 测试与 11 组/85 次进程验证再次全部通过，确认无未提交文件依赖。
 - 固定版本官方校验值与本机 16 个二进制文件均一致，归档地址已验证可用。
 - 中文 README、API/架构/限制、AI 辅助和验收文档已形成；一页申报 PDF 已生成并渲染检查。
-- GitHub Actions 的 Windows/Linux 检查已配置，尚未运行远程 CI。
+- 已推送公开仓库 main，保留全部真实阶段提交。GitHub Linux CI 已通过，Windows 远程检查结果见下方链接。
 - 本地阶段记录：ae13933 初始方案与项目；e7f099d 核心实现；07c6bcf 独立验证和边界检查；后续提交以 `git log` 为准。
 
 ## 外部待办
 
 - 用户已将仓库改为 Public；GitHub API 确认公开，远程没有分支和已有内容。本地分支已改为 main，origin 指向用户提供的仓库。
-- 首次推送因本机 GitHub 未认证失败；正在通过 Git Credential Manager 的官方设备流程登录。尚未成功推送，不能标记已同步。首次同步不得使用 force。
+- GitHub 网页登录已成功；609b140 已推送 main 并关联 origin/main。后续同步使用正常 push，不使用 force。
 - 正式章程本轮仍未读到正文。报名、入群、申报审核状态待用户确认；没有替用户发消息或提交表单。
-- Linux CI 需要仓库同步后实际运行；尚不能标记为通过。
+- CI 实证：https://github.com/JingLan0v0/MoonBit/actions/runs/35584063766 。Linux 完整验证已通过；Windows 远程状态以该记录为准。
 - 用户需要填写真实报名信息、确认入群，并在申报通过/验收通过/到账时提供真实回执。
 
 ## 下一步
 
-完成 GitHub 登录后推送 main，再检查 Windows/Linux CI；协助填写一页说明和报名资料，补核验正式章程。主体功能不应继续无目的扩张。本地测试证据见 `docs/verification-windows.json`；完整复现入口见 README。
+协助填写一页说明和报名资料，补核验正式章程，确认入群与报名回执。主体功能不应继续无目的扩张。本地测试证据见 `docs/verification-windows.json` 与 `docs/verification-clean-windows.json`；完整复现入口见 README。交付压缩包可用 `scripts/package.ps1` 重建。
 
 ## 恢复入口
 
