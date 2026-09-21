@@ -1,103 +1,182 @@
 # MoonRow
 
-**按业务编号比较两份 CSV，准确找出新增、删除和字段变化。**
+[![Verify MoonRow](https://github.com/JingLan0v0/MoonBit/actions/workflows/ci.yml/badge.svg)](https://github.com/JingLan0v0/MoonBit/actions/workflows/ci.yml)
 
-MoonRow 用 MoonBit 实现解析、主键匹配和报告生成，提供可复用库及离线命令行。适合商品目录、数据库导出和数据处理结果的变更复核。行顺序或列顺序变化不会产生假差异。
+**按业务主键比较两份 CSV，找出新增、删除和字段变化。**
 
-## 快速运行
+MoonRow 是用 MoonBit 编写的可复用数据差异库和离线命令行工具。它按编号对应记录，行列重排不会产生假差异；组合主键、重复键诊断和精确字符串比较让业务差异可以被程序和人工共同复核。
 
-运行已构建的交付包只需要 Node.js 22 或更新版本；本项目实测为 **Node.js 24.14.0**。没有 npm 运行依赖，无需 API 密钥和后台服务。
+当前版本为 **0.1.0**，支持 **JS 后端**。源码可构建，本地可生成便携包与 Mooncakes 包；**尚未发布到 Mooncakes 或 npm**。
 
-```text
+## 适用场景
+
+| 使用者与问题 | 匹配方式 | 可复现成果 |
+| --- | --- | --- |
+| 运营核对两次商品目录，检查上架、下架和价格修改 | 商品编号，忽略导出时间 | 新增 1、删除 1、修改 1、未变化 2 |
+| 仓管核对多仓库存，同一商品可能出现在多个仓库 | 商品编号＋仓库 | 区分 A001/North 与 A001/South，只报告实际变化 |
+| 开发者复核部署配置，前导零变化可能影响业务 | 服务＋环境 | 明确报告字符串 `001` → `1` |
+
+输入、命令、预期结果及使用边界见 [三个完整示例](examples/README.md)。样例全部为虚构数据，并由集成测试验证。
+
+## 五分钟运行
+
+需要 Node.js **22 或更新版本**（CI 固定为 **24.14.0**）和 MoonBit **0.10.14+7d59c7ec9**。完整版本记录见 [toolchain.json](toolchain.json)。项目无额外 npm 或 Mooncakes 依赖，无需 `npm install`、API 密钥或后台服务。
+
+### 1. 获取源码与工具链
+
+```sh
+git clone https://github.com/JingLan0v0/MoonBit.git
+cd MoonBit
+```
+
+MoonBit 官方安装入口：[下载页面](https://www.moonbitlang.cn/download)。以下命令保存并运行官方安装脚本。
+
+Windows PowerShell：
+
+```powershell
+$env:MOONBIT_INSTALL_VERSION = '0.10.14+7d59c7ec9'
+Invoke-WebRequest https://cli.moonbitlang.cn/install/powershell.ps1 -OutFile "$env:TEMP/install-moonbit.ps1"
+& "$env:TEMP/install-moonbit.ps1"
+```
+
+Linux：
+
+```sh
+curl -fsSL https://cli.moonbitlang.cn/install/unix.sh -o /tmp/install-moonbit.sh
+bash /tmp/install-moonbit.sh '0.10.14+7d59c7ec9'
+export PATH="$HOME/.moon/bin:$PATH"
+```
+
+安装后重新打开终端，确认 `node --version` 和 `moon version --all` 可用。
+
+### 2. 构建并比较
+
+```sh
+node scripts/build.mjs
 node bin/moonrow.cjs examples/catalog/before.csv examples/catalog/after.csv --key sku --ignore updated_at
 ```
 
-预期：新增 A004、删除 A002、A001 的 price 从 `3.00` 改为 `3.50`，A003/A005 不变。
+预期摘要：
 
 ```text
 before=4 after=4 added=1 removed=1 changed=1 unchanged=2 changed_cells=1
 ```
 
-**这个示例的退出码是 1，表示成功发现差异。** 0 表示无差异，2 才是参数或输入错误。
+明细为新增 A004、删除 A002、A001 的 price 从 `3.00` 变为 `3.50`，A003/A005 不变。
+**该命令返回 1，表示成功发现差异。**
 
-从 Git 仓库取得的源码不包含生成产物，请先按下一节构建。
+已取得便携交付包的用户只需要 Node.js，可直接运行比较命令或在 Windows 双击 `打开示例.cmd`。GitHub 源码不含 `dist/`，需要先构建；当前没有公开的 Release 下载地址。
 
-## 从源码构建
-
-工具链固定为 `0.10.14+7d59c7ec9`，完整环境见 [toolchain.json](toolchain.json)。安装方式参见 [MoonBit 官方下载页](https://www.moonbitlang.cn/download)。
-
-Windows PowerShell 安装固定版本：
-
-```powershell
-$env:MOONBIT_INSTALL_VERSION = '0.10.14+7d59c7ec9'
-Invoke-WebRequest https://cli.moonbitlang.cn/install/powershell.ps1 -OutFile install-moonbit.ps1
-./install-moonbit.ps1
-```
-
-Linux 安装固定版本：
+### 3. 完整验证
 
 ```sh
-curl -fsSL https://cli.moonbitlang.cn/install/unix.sh -o install-moonbit.sh
-bash install-moonbit.sh '0.10.14+7d59c7ec9'
-export PATH="$HOME/.moon/bin:$PATH"
-```
-
-安装后确认 `moon version --all` 可运行，在项目根目录执行：
-
-```text
-node scripts/build.mjs
-node bin/moonrow.cjs --help
 node scripts/verify.mjs
 ```
 
-构建生成 `dist/moonrow.cjs`。构建脚本优先使用上级目录 `.tools/moon` 中的本地工具链，否则使用 PATH 中的 `moon`。项目没有额外 Mooncakes 或 npm 依赖，不需要 `npm install`。Windows 当前工作区还提供 `scripts/moon.ps1` 调用本地工具链。
+依次执行静态检查、MoonBit 单元测试、格式检查、公共接口生成、发布构建、独立库调用、实际进程测试及 Mooncakes 本地包检查。整个验证命令成功时返回 0。
 
-## 常用命令
+## 命令与退出码
 
 ```text
-node bin/moonrow.cjs before.csv after.csv --key id
-node bin/moonrow.cjs before.csv after.csv --key sku --key warehouse --ignore updated_at
-node bin/moonrow.cjs before.csv after.csv --key id --format json
-node bin/moonrow.cjs before.csv after.csv --key id --format markdown
-node bin/moonrow.cjs --version
+moonrow BEFORE.csv AFTER.csv --key COLUMN [options]
 ```
 
-可以将标准输出重定向保存报告。错误只写标准错误，不会混入 JSON。可用 `npm link` 自行建立本机 `moonrow` 命令，但这不是运行的前提；当前未发布 npm 包。
+通过 `node bin/moonrow.cjs` 调用，无需全局安装；可选 `npm link` 建立本机 `moonrow` 命令。
 
-## 比较规则
+| 参数 | 说明 |
+| --- | --- |
+| `--key COLUMN` | 必填，可重复，顺序决定组合主键的顺序 |
+| `--ignore COLUMN` | 可重复，忽略非主键列，例如导出时间 |
+| `--format text/json/markdown` | 默认 text；只能指定一次 |
+| `--` | 后续参数作为文件路径处理，适合以短横线开头的文件名 |
+| `--help` / `-h` | 显示帮助 |
+| `--version` | 显示版本 |
 
-- UTF-8 CSV、非空唯一表头；支持 BOM、LF/CRLF、中文、emoji、引号中的逗号/双引号/换行。
-- 显式指定单列或组合主键；空主键、重复主键直接报错并指出记录。
-- 原样比较字符串：`001` 与 `1` 不同，不自动推断数字、日期或空值。
-- 非忽略列的列名集合必须相同；允许列重排。忽略列可以只存在于一侧，但至少存在一侧且不能是主键。
-- 至少保留一个非主键比较列。主键变化表示一条删除加一条新增。
-- 每个文件最多 10 MiB / 50,000 条数据记录 / 100 列；每字段最多 262,144 个 UTF-16 单元。内存内处理，不面向无限大文件。
-- 报告排序固定；JSON 保留字符串原值；文本和 Markdown 转义特殊字符以便安全显示。
+| 退出码 | 含义 | 自动化处理 |
+| --- | --- | --- |
+| 0 | 比较成功，无差异；或帮助／版本命令成功 | 可继续 |
+| 1 | 比较成功，发现差异 | 按业务决定是否中断 |
+| 2 | 参数、输入格式、主键、资源限制或读文件错误 | 先处理错误 |
 
-完整约定见 [限制说明](docs/limitations.md)。
+报告仅输出到标准输出，诊断仅输出到标准错误。不会修改输入文件。
 
-## 库调用与结构
+```sh
+node bin/moonrow.cjs examples/inventory/before.csv examples/inventory/after.csv --key sku --key warehouse --ignore exported_at --format json > inventory-diff.json
+node bin/moonrow.cjs examples/catalog/before.csv examples/catalog/after.csv --key sku --ignore updated_at --format markdown > catalog-diff.md
+```
 
-核心包为 `JingLan0v0/moonrow`。独立示例包：
+路径含空格时加引号。Windows PowerShell 5.1 重定向可能产生 UTF-16 文件；需要保存 UTF-8 报告时使用 PowerShell 7 或显式指定输出编码。
+
+## 库接口
+
+模块导入路径仍是 `JingLan0v0/moonrow`，`src/` 是物理源码目录，不是导入路径的一部分。
 
 ```text
+import { "JingLan0v0/moonrow" @moonrow }
+```
+
+调用 `compare_csv(before, after, { keys: ["id"], ignore: [] })` 得到 `DiffResult`，失败抛出带诊断信息的 `MoonRowError`。核心库接收字符串，不访问文件或网络。
+
+完整可运行调用包位于 [src/examples/library_usage](src/examples/library_usage)：
+
+```sh
 moon run src/examples/library_usage --target js
 ```
 
-详细接口见 [API 文档](docs/api.md) 和 [生成的接口](src/pkg.generated.mbti)，实现取舍见 [架构说明](docs/architecture.md)。目前尚未发布 Mooncakes，不能用未发布的包版本安装。
+详见 [API 与 JSON 结构](docs/api.md)、[生成接口](src/pkg.generated.mbti)。实际发布前不要执行不存在的 `moon add` 安装；发布步骤见 [发布说明](docs/publishing.md)。
 
-## 测试与验收
+## 比较语义与边界
 
-`node scripts/verify.mjs` 执行静态检查、MoonBit 测试、格式检查、公共接口生成、正式构建、独立库示例和实际进程测试。固定种子的独立参考实现核对完整 JSON，另覆盖错误输入、UTF-8、组合主键、报告转义和所有默认限制边界。
+- UTF-8、逗号分隔、非空且唯一的表头。支持文件头 BOM、LF/CRLF、中文、emoji、引号内逗号／双引号／换行。
+- 表头、主键和值都精确区分大小写和空格。`001` 与 `1`、`1.0` 与 `1.00` 不相同。
+- 至少一列主键，组合键各部分不可为空；重复键直接报错，不选择第一条或最后一条。
+- 除忽略列外，两侧列名集合必须相同。忽略列可以只存在一侧，但不可是主键；至少保留一个非主键比较列。
+- 主键变化视为删除和新增。差异按键确定排序，便于回归核对。
+- 默认每文件上限：10 MiB、50,000 条数据记录、100 列；每字段 262,144 个 UTF-16 单元。全部在内存中处理，内存占用大于原文件大小。
+- 不支持 `.xlsx`、GBK、stdin、数据库直连、远程 URL、数值容差、自动类型推断或补丁应用。
+- CSV 解析、主键索引、比较与报告由 MoonBit 实现；Node.js 只承担宿主读写、编码和进程接口。
 
-验证证据写入本机 `artifacts/integration-results.json`，不把临时大文件提交到仓库。[验收说明](docs/acceptance.md) 记录本地复现和 Linux / Windows 远程通过的证据。
+完整规则见 [限制说明](docs/limitations.md)。这是专门的数据快照比较工具，不声称替代通用表格分析库。
 
-GitHub Actions 已配置 Windows / Linux 检查；当前状态必须以 [Actions 实际运行](https://github.com/JingLan0v0/MoonBit/actions) 为准，不能仅凭配置文件宣称通过。
+## 常见问题
 
-## 开源与参赛
+| 现象 | 原因与处理 |
+| --- | --- |
+| `MoonRow is not built yet` | 源码未构建，先运行 `node scripts/build.mjs` |
+| CI／终端显示退出码 1 | 可能是正常差异；阅读报告，不要把 1 当成输入错误 |
+| `DUPLICATE_KEY` | 主键不唯一，检查数据或增加 `--key` 组成业务唯一键 |
+| `SCHEMA_MISMATCH` | 两份文件的非忽略列不一致；核对导出结构或明确忽略无关列 |
+| `UTF8` | 文件不是合法 UTF-8，需要在来源工具中重新导出或转换 |
+| `LIMIT_*` | 超过声明的资源边界；拆分业务数据或使用适合该规模的工具 |
+| 安装工具链下载超时 | 网络下载问题；稍后重试官方安装入口。CI 使用隔离安装和备用官方镜像 |
 
-原创实现，Apache-2.0 许可证。使用 MoonBit 标准库和 Node.js 宿主，参考来源与许可见 [第三方说明](THIRD_PARTY_NOTICES.md)，AI 辅助说明见 [docs/ai-assistance.md](docs/ai-assistance.md)。
+## 仓库结构
 
-本项目拟参加 2026 MoonBit 九月黑客松“数据处理”方向。参赛申报、官方审核、验收与支持发放状态见 [实施交接](docs/progress.md)。代码完成不代表比赛已经通过。
+```text
+src/                       MoonBit 可复用核心及包内单元测试
+  cli/                     参数解析与报告格式选择
+  cmd/main/                命令编排 + 独立 host.mbt 系统适配
+  examples/library_usage/  独立库调用示例
+bin/                       Node 命令启动器
+examples/                  三组业务 CSV 与预期结果
+scripts/                   构建、工具链、校验、交付打包
+tests/                     真实进程测试与独立参考结果
+docs/                      API、架构、限制、发布与比赛状态
+.github/                   双平台 CI、缺陷及 PR 模板
+```
 
-遇到问题请在仓库 Issues 中附上最小虚构样例、命令、版本、预期与实际输出；不要上传含个人信息的原始业务表。
+MoonBit 单元测试遵循工具链要求，与被测包同目录；跨进程测试在 `tests/`。`dist/`、`_build/`、`artifacts/` 是生成目录，不提交源码仓库。
+
+## 测试、维护与许可
+
+验证覆盖 18 组 MoonBit 测试、13 组集成场景／87 次真实进程调用，其中包含 25 组固定种子数据双向独立对照，以及文件大小、字段长度、行列数的边界检查。最新云端结果以 [GitHub Actions](https://github.com/JingLan0v0/MoonBit/actions) 为准，历史记录附带被测提交编号。
+
+- [架构与设计取舍](docs/architecture.md)
+- [贡献流程](CONTRIBUTING.md)
+- [验收复现](docs/acceptance.md)
+- [比赛要求与当前缺口](docs/competition.md)
+- [开发交接状态](docs/progress.md)
+
+原创实现，采用 [Apache-2.0](LICENSE)；参考来源见 [第三方说明](THIRD_PARTY_NOTICES.md)，AI 使用情况见 [AI 辅助说明](docs/ai-assistance.md)。问题反馈请附最小虚构样例，勿上传真实客户数据。
+
+参赛路径为月度新项目，选题为数据处理。工程通过不代表报名或官方验收通过；**正式申报书须由参赛者人工撰写**，仓库历史 AI 草稿不能替代它。Mooncakes 发布、报名、入群和官方审核仍须完成并留存真实回执。
