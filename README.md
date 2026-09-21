@@ -90,7 +90,7 @@ moon run examples/library_usage --target js
 
 `node scripts/verify.mjs` 执行静态检查、MoonBit 测试、格式检查、公共接口生成、正式构建、独立库示例和实际进程测试。固定种子的独立参考实现核对完整 JSON，另覆盖错误输入、UTF-8、组合主键、报告转义和所有默认限制边界。
 
-验证证据写入本机 `artifacts/integration-results.json`，不把临时大文件提交到仓库。[验收说明](docs/acceptance.md) 区分本地通过与尚未执行的远程验证。
+验证证据写入本机 `artifacts/integration-results.json`，不把临时大文件提交到仓库。[验收说明](docs/acceptance.md) 记录本地复现和 Linux / Windows 远程通过的证据。
 
 GitHub Actions 已配置 Windows / Linux 检查；当前状态必须以 [Actions 实际运行](https://github.com/JingLan0v0/MoonBit/actions) 为准，不能仅凭配置文件宣称通过。
 

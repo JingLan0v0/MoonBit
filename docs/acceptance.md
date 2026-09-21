@@ -2,9 +2,9 @@
 
 ## 状态
 
-2026-09-21：Windows 本地与干净目录复现全部通过，公开仓库已同步，Linux 远程 CI 已通过。工程已具备验收演示条件；这不是主办方的通过证明。正式章程复核、报名、入群和官方验收尚需完成或确认。
+2026-09-21：Windows 本地与干净目录复现全部通过，公开仓库已同步，Linux / Windows 远程 CI 均已通过。工程已具备验收演示条件；这不是主办方的通过证明。正式章程复核、报名、入群和官方验收尚需完成或确认。
 
-远程验证记录：[GitHub Actions](https://github.com/JingLan0v0/MoonBit/actions/runs/35584063766)。验证对应 609b140；后续材料更新不改变产品算法。
+远程验证记录：[GitHub Actions](https://github.com/JingLan0v0/MoonBit/actions/runs/35585337068) 和 [真实结果快照](verification-ci.json)。验证对应 1d6a672；后续材料更新不改变产品算法。
 
 ## 一次复现
 
