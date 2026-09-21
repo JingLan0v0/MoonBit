@@ -2,6 +2,20 @@
 
 This is a [MoonBit](https://docs.moonbitlang.com) project.
 
+## MoonRow handoff
+
+Read `docs/progress.md` first. The user has authorized implementation, prioritizing
+the monthly 150 + 350 RMB support. Do not confuse local completion with official
+acceptance. The initial planning documents contain historical pre-development
+states; the progress file and actual repository are current.
+
+Use `node scripts/verify.mjs` for the complete JS-backend checks. On this Windows
+workspace `scripts/moon.ps1` finds the workspace-local compiler; on normal clones
+install the version in `toolchain.json`. Never commit `.tools`, `_build`, `dist`,
+`artifacts`, account credentials, or real customer CSVs. `output/pdf` contains
+reviewed submission material and may be committed. Keep claims about CI and
+registration backed by actual results.
+
 You can browse and install extra skills here:
 <https://github.com/moonbitlang/skills>
 
