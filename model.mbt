@@ -41,7 +41,7 @@ fn fail(
 ///|
 /// Parsed CSV. Record numbers are 1-based CSV records, including the header.
 /// Table construction is private; callers obtain validated shape through parse_csv.
-pub struct Table {
+struct Table {
   headers : Array[String]
   rows : Array[Array[String]]
 }

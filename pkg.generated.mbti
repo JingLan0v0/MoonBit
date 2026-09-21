@@ -117,10 +117,7 @@ pub fn Summary::equal(Self, Self) -> Bool
 pub fn Summary::not_equal(Self, Self) -> Bool
 pub fn Summary::to_json(Self) -> Json
 
-pub struct Table {
-  headers : Array[String]
-  rows : Array[Array[String]]
-}
+type Table
 pub fn Table::headers(Self) -> Array[String]
 pub fn Table::row_count(Self) -> Int
 
