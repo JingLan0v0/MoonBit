@@ -46,3 +46,5 @@ jobs:
             artifacts/catalog.json
             artifacts/catalog.md
             artifacts/catalog.txt
+            artifacts/package-check.json
+            _build/publish/*.zip

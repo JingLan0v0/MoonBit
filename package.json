@@ -9,6 +9,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "test": "node scripts/verify.mjs",
+    "package:check": "node scripts/check-package.mjs",
     "demo": "node bin/moonrow.cjs examples/catalog/before.csv examples/catalog/after.csv --key sku --ignore updated_at"
   }
 }

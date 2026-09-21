@@ -64,6 +64,26 @@ test('catalog expected result and three report formats', () => {
   }
 });
 
+test('inventory example matches compound keys despite reordered columns', () => {
+  const p = execute(['examples/inventory/before.csv', 'examples/inventory/after.csv',
+    '--key', 'sku', '--key', 'warehouse', '--ignore', 'exported_at', '--format', 'json']);
+  assert.equal(p.status, 1); assert.equal(p.stderr, '');
+  const r = JSON.parse(p.stdout);
+  assert.deepEqual(r.summary, { before_rows: 3, after_rows: 3, added: 1, removed: 1, changed: 1, unchanged: 1, changed_cells: 1, has_diff: true });
+  assert.deepEqual(r.changed, [{ key: ['A001', 'North'], changes: [{ column: 'quantity', before: '10', after: '12' }] }]);
+  assert.deepEqual(r.added[0].key, ['A003', 'North']);
+  assert.deepEqual(r.removed[0].key, ['A002', 'North']);
+});
+
+test('configuration example preserves significant leading zeros', () => {
+  const p = execute(['examples/config/before.csv', 'examples/config/after.csv',
+    '--key', 'service', '--key', 'environment', '--format', 'json']);
+  assert.equal(p.status, 1); assert.equal(p.stderr, '');
+  const r = JSON.parse(p.stdout);
+  assert.deepEqual(r.summary, { before_rows: 2, after_rows: 2, added: 0, removed: 0, changed: 1, unchanged: 1, changed_cells: 1, has_diff: true });
+  assert.deepEqual(r.changed, [{ key: ['checkout', 'production'], changes: [{ column: 'value', before: '001', after: '1' }] }]);
+});
+
 test('help version usage and actual exits 0 1 2', () => {
   assert.equal(execute(['--help']).status, 0);
   assert.equal(execute(['--version']).stdout.trim(), '0.1.0');

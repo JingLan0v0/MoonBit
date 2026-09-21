@@ -1,0 +1,3 @@
+service,environment,value
+checkout,production,001
+search,production,true

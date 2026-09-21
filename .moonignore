@@ -1,0 +1,10 @@
+# This replaces .gitignore for Mooncakes packaging; repeat generated exclusions.
+_build/
+target/
+dist/
+artifacts/
+node_modules/
+output/
+docs/archive/
+scripts/proposal_pdf.py
+*.log

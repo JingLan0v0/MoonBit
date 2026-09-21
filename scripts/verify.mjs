@@ -7,3 +7,4 @@ runMoon(['info', '--target', 'js']);
 await import('./build.mjs');
 runMoon(['run', 'src/examples/library_usage', '--target', 'js']);
 await import('../tests/integration.mjs');
+await import('./check-package.mjs');
