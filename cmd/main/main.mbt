@@ -7,7 +7,98 @@ extern "js" fn set_exit(code : Int) -> Unit =
   #|(code) => { process.exitCode = code; }
 
 ///|
+extern "js" fn write_stderr(text : String) -> Unit =
+  #|(text) => process.stderr.write(text)
+
+///|
+extern "js" fn arguments() -> FixedArray[String] =
+  #|() => process.argv.slice(2)
+
+///|
+// Host-only operations: bounded regular-file reads and fatal UTF-8 decoding.
+// Return [error code, message or text] to avoid JS exceptions crossing the FFI.
+extern "js" fn read_utf8(path : String) -> FixedArray[String] =
+  #|(path) => {
+  #|  const fs = require('node:fs');
+  #|  const limit = 10 * 1024 * 1024;
+  #|  let fd;
+  #|  try {
+  #|    fd = fs.openSync(path, 'r');
+  #|    const stat = fs.fstatSync(fd);
+  #|    if (!stat.isFile()) return ['IO_FILE', 'input must be a regular file'];
+  #|    if (stat.size > limit) return ['LIMIT_BYTES', 'input exceeds 10 MiB'];
+  #|    const chunks = [];
+  #|    let total = 0;
+  #|    while (total <= limit) {
+  #|      const buffer = Buffer.allocUnsafe(Math.min(65536, limit + 1 - total));
+  #|      const count = fs.readSync(fd, buffer, 0, buffer.length, null);
+  #|      if (!count) break;
+  #|      chunks.push(buffer.subarray(0, count));
+  #|      total += count;
+  #|    }
+  #|    if (total > limit) return ['LIMIT_BYTES', 'input exceeds 10 MiB'];
+  #|    try {
+  #|      return ['', new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(Buffer.concat(chunks, total))];
+  #|    } catch (_) { return ['UTF8', 'input is not valid UTF-8']; }
+  #|  } catch (error) {
+  #|    return ['IO_READ', String(error.code || 'read failed')];
+  #|  } finally {
+  #|    if (fd !== undefined) { try { fs.closeSync(fd); } catch (_) {} }
+  #|  }
+  #|}
+
+///|
+fn read_input(path : String, side : String) -> String raise @lib.MoonRowError {
+  let result = read_utf8(path)
+  if result[0] != "" {
+    raise @lib.MoonRowError({
+      code: result[0],
+      side,
+      record: 0,
+      line: 0,
+      column: 0,
+      message: "\{path}: \{result[1]}",
+    })
+  }
+  result[1]
+}
+
+///|
+fn run() -> Int raise @lib.MoonRowError {
+  let args : Array[String] = []
+  for arg in arguments() {
+    args.push(arg)
+  }
+  match @cli.parse_args(args) {
+    Help => {
+      write_stdout(@cli.help())
+      0
+    }
+    Version => {
+      write_stdout("\{@lib.version()}\n")
+      0
+    }
+    Compare(command) => {
+      let before = read_input(command.before, "before")
+      let after = read_input(command.after, "after")
+      let result = @lib.compare_csv(before, after, command.options)
+      write_stdout(@cli.render(result, command.format))
+      if result.summary.has_diff {
+        1
+      } else {
+        0
+      }
+    }
+  }
+}
+
+///|
 fn main {
-  write_stdout("MoonRow toolchain ready\n")
-  set_exit(0)
+  let code = run() catch {
+    @lib.MoonRowError(diagnostic) => {
+      write_stderr(@lib.render_diagnostic(diagnostic))
+      2
+    }
+  }
+  set_exit(code)
 }

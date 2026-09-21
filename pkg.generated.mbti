@@ -1,0 +1,129 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "JingLan0v0/moonrow"
+
+// Values
+pub fn compare(Table, Table, Options) -> DiffResult raise MoonRowError
+
+pub fn compare_csv(String, String, Options, limits? : Limits) -> DiffResult raise MoonRowError
+
+pub fn default_limits() -> Limits
+
+pub fn parse_csv(String, side? : String, limits? : Limits) -> Table raise MoonRowError
+
+pub fn quote_text(String) -> String
+
+pub fn render_diagnostic(Diagnostic) -> String
+
+pub fn render_json(DiffResult) -> String
+
+pub fn render_markdown(DiffResult) -> String
+
+pub fn render_text(DiffResult) -> String
+
+pub fn version() -> String
+
+// Errors
+pub(all) suberror MoonRowError {
+  MoonRowError(Diagnostic)
+}
+
+// Types and methods
+pub(all) struct CellChange {
+  column : String
+  before : String
+  after : String
+} derive(Eq, ToJson)
+pub fn CellChange::equal(Self, Self) -> Bool
+pub fn CellChange::not_equal(Self, Self) -> Bool
+pub fn CellChange::to_json(Self) -> Json
+
+pub(all) struct Diagnostic {
+  code : String
+  side : String
+  record : Int
+  line : Int
+  column : Int
+  message : String
+} derive(Eq, ToJson)
+pub fn Diagnostic::equal(Self, Self) -> Bool
+pub fn Diagnostic::not_equal(Self, Self) -> Bool
+pub fn Diagnostic::to_json(Self) -> Json
+
+pub(all) struct DiffResult {
+  schema_version : Int
+  keys : Array[String]
+  columns : Array[String]
+  summary : Summary
+  added : Array[RowData]
+  removed : Array[RowData]
+  changed : Array[RowChange]
+} derive(Eq, ToJson)
+pub fn DiffResult::equal(Self, Self) -> Bool
+pub fn DiffResult::not_equal(Self, Self) -> Bool
+pub fn DiffResult::to_json(Self) -> Json
+
+pub(all) struct FieldValue {
+  column : String
+  value : String
+} derive(Eq, ToJson)
+pub fn FieldValue::equal(Self, Self) -> Bool
+pub fn FieldValue::not_equal(Self, Self) -> Bool
+pub fn FieldValue::to_json(Self) -> Json
+
+pub(all) struct Limits {
+  max_rows : Int
+  max_columns : Int
+  max_field_units : Int
+} derive(Eq, ToJson)
+pub fn Limits::equal(Self, Self) -> Bool
+pub fn Limits::not_equal(Self, Self) -> Bool
+pub fn Limits::to_json(Self) -> Json
+
+pub(all) struct Options {
+  keys : Array[String]
+  ignore : Array[String]
+} derive(Eq, ToJson)
+pub fn Options::equal(Self, Self) -> Bool
+pub fn Options::not_equal(Self, Self) -> Bool
+pub fn Options::to_json(Self) -> Json
+
+pub(all) struct RowChange {
+  key : Array[String]
+  changes : Array[CellChange]
+} derive(Eq, ToJson)
+pub fn RowChange::equal(Self, Self) -> Bool
+pub fn RowChange::not_equal(Self, Self) -> Bool
+pub fn RowChange::to_json(Self) -> Json
+
+pub(all) struct RowData {
+  key : Array[String]
+  fields : Array[FieldValue]
+} derive(Eq, ToJson)
+pub fn RowData::equal(Self, Self) -> Bool
+pub fn RowData::not_equal(Self, Self) -> Bool
+pub fn RowData::to_json(Self) -> Json
+
+pub(all) struct Summary {
+  before_rows : Int
+  after_rows : Int
+  added : Int
+  removed : Int
+  changed : Int
+  unchanged : Int
+  changed_cells : Int
+  has_diff : Bool
+} derive(Eq, ToJson)
+pub fn Summary::equal(Self, Self) -> Bool
+pub fn Summary::not_equal(Self, Self) -> Bool
+pub fn Summary::to_json(Self) -> Json
+
+pub struct Table {
+  headers : Array[String]
+  rows : Array[Array[String]]
+}
+pub fn Table::headers(Self) -> Array[String]
+pub fn Table::row_count(Self) -> Int
+
+// Type aliases
+
+// Traits

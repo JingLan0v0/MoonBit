@@ -1,0 +1,39 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "JingLan0v0/moonrow/cli"
+
+import {
+  "JingLan0v0/moonrow",
+}
+
+// Values
+pub fn help() -> String
+
+pub fn parse_args(Array[String]) -> Command raise @moonrow.MoonRowError
+
+pub fn render(@moonrow.DiffResult, Format) -> String
+
+// Errors
+
+// Types and methods
+pub(all) enum Command {
+  Help
+  Version
+  Compare(CompareCommand)
+}
+
+pub(all) struct CompareCommand {
+  before : String
+  after : String
+  options : @moonrow.Options
+  format : Format
+}
+
+pub(all) enum Format {
+  Text
+  Json
+  Markdown
+}
+
+// Type aliases
+
+// Traits

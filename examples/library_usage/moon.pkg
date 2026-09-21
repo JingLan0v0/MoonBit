@@ -1,0 +1,5 @@
+import {
+  "JingLan0v0/moonrow",
+}
+
+pkgtype(kind: "executable")

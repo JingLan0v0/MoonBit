@@ -1,0 +1,14 @@
+{
+  "name": "moonrow",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MoonBit CSV snapshot comparison CLI",
+  "license": "Apache-2.0",
+  "bin": { "moonrow": "bin/moonrow.cjs" },
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node scripts/verify.mjs",
+    "demo": "node bin/moonrow.cjs examples/catalog/before.csv examples/catalog/after.csv --key sku --ignore updated_at"
+  }
+}

@@ -19,7 +19,7 @@ repository = "https://github.com/JingLan0v0/MoonBit"
 
 license = "Apache-2.0"
 
-keywords = ["csv", "diff", "data", "cli"]
+keywords = [ "csv", "diff", "data", "cli" ]
 
 preferred_target = "js"
 

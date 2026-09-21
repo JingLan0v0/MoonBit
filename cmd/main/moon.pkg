@@ -1,7 +1,10 @@
 import {
   "JingLan0v0/moonrow" @lib,
+  "JingLan0v0/moonrow/cli",
 }
 
 pkgtype(kind: "executable")
 
-options("link": { "js": { "format": "cjs" } })
+options(
+  link: { "js": { "format": "cjs" } },
+)
