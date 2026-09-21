@@ -1,0 +1,86 @@
+{
+  "source_commit": "ac7747cb096660495f6e41cae09436ec5a645e1a",
+  "verification": "Fresh extraction of local Mooncakes ZIP; full verify.mjs exit 0",
+  "moonbit_tests": 18,
+  "integration": {
+    "generated_at": "2026-09-21T13:35:26.426Z",
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.14.0",
+    "subprocesses": 87,
+    "suites": [
+      {
+        "name": "catalog expected result and three report formats",
+        "passed": true,
+        "duration_ms": 210
+      },
+      {
+        "name": "inventory example matches compound keys despite reordered columns",
+        "passed": true,
+        "duration_ms": 66
+      },
+      {
+        "name": "configuration example preserves significant leading zeros",
+        "passed": true,
+        "duration_ms": 69
+      },
+      {
+        "name": "help version usage and actual exits 0 1 2",
+        "passed": true,
+        "duration_ms": 581
+      },
+      {
+        "name": "strict UTF-8, BOM, emoji, CRLF and quoted multiline values",
+        "passed": true,
+        "duration_ms": 275
+      },
+      {
+        "name": "25 seeded datasets match independent oracle including quoted values",
+        "passed": true,
+        "duration_ms": 3501
+      },
+      {
+        "name": "composite key collision and ignored single-side columns",
+        "passed": true,
+        "duration_ms": 67
+      },
+      {
+        "name": "default field limits below at above including UTF-16 surrogate pairs",
+        "passed": true,
+        "duration_ms": 438
+      },
+      {
+        "name": "default column limits below at above",
+        "passed": true,
+        "duration_ms": 202
+      },
+      {
+        "name": "default row limits below at above",
+        "passed": true,
+        "duration_ms": 452
+      },
+      {
+        "name": "10 MiB bounded reader below at above byte limit",
+        "passed": true,
+        "duration_ms": 4013
+      },
+      {
+        "name": "report and error control characters are inert",
+        "passed": true,
+        "duration_ms": 200
+      },
+      {
+        "name": "10,000 row benchmark returns correct totals",
+        "passed": true,
+        "duration_ms": 115
+      }
+    ]
+  },
+  "package": {
+    "checked_at": "2026-09-21T13:35:26.899Z",
+    "version": "0.1.0",
+    "passed": true,
+    "scope": "Local package contents and version consistency; not a registry publication"
+  },
+  "archive_sha256": "86e34238ca2fb6e874570885b482b6ac5159ccc473935d1500d5b1fc96a39ac3"
+}

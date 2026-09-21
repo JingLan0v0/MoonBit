@@ -4,7 +4,7 @@
 
 2026-09-21：Windows 本地与干净目录复现全部通过，公开仓库已同步，Linux / Windows 远程 CI 均已通过。工程已具备验收演示条件；这不是主办方的通过证明。章程已读取；Mooncakes 发布、人工申报书、报名、入群和官方验收尚需完成或确认。
 
-远程验证记录：[GitHub Actions](https://github.com/JingLan0v0/MoonBit/actions/runs/35585337068) 和 [真实结果快照](verification-ci.json)。验证对应 1d6a672；后续材料更新不改变产品算法。
+最新远程验证：[GitHub Actions](https://github.com/JingLan0v0/MoonBit/actions/runs/35606815890) 和 [结果快照](verification-engineering-ci.json)，对应 ac7747c，Windows/Linux 均成功。独立解压 Mooncakes 本地包后完整验证通过，见 [干净包证据](verification-engineering-windows.json)。后续证据文档提交不改变被测源码；旧版本结果仍保留在 verification-ci.json。
 
 ## 一次复现
 

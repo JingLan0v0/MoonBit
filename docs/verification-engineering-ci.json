@@ -1,0 +1,23 @@
+{
+  "run_id": 35606815890,
+  "head_sha": "ac7747cb096660495f6e41cae09436ec5a645e1a",
+  "status": "completed",
+  "conclusion": "success",
+  "html_url": "https://github.com/JingLan0v0/MoonBit/actions/runs/35606815890",
+  "jobs": [
+    {
+      "id": 106355802272,
+      "name": "verify (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/JingLan0v0/MoonBit/actions/runs/35606815890/job/106355802272"
+    },
+    {
+      "id": 106355802563,
+      "name": "verify (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/JingLan0v0/MoonBit/actions/runs/35606815890/job/106355802563"
+    }
+  ]
+}

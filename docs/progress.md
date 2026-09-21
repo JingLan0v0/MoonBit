@@ -6,7 +6,9 @@
 
 ## 当前工程状态
 
-2026-09-21 工程整理：源码迁入 src，公共导入路径仍为 JingLan0v0/moonrow；系统适配在 src/cmd/main/host.mbt，集成验证在 tests。三组业务例子为商品目录、多仓库存、部署配置。18 组 MoonBit 测试及 13 组集成场景/87 次进程调用已分别通过；新增本地 Mooncakes 打包检查已通过。最终提交的完整复现与 CI 结果须查看实际证据，不能沿用旧提交结果冒充新版本。
+2026-09-21 工程整理：源码迁入 src，公共导入路径仍为 JingLan0v0/moonrow；系统适配在 src/cmd/main/host.mbt，集成验证在 tests。三组业务例子为商品目录、多仓库存、部署配置。18 组 MoonBit 测试及 13 组集成场景/87 次进程调用、Mooncakes 本地打包检查均已通过。已从实际发布 ZIP 独立解压并完整复现，证据见 verification-engineering-windows.json。过程中发现忽略规则未随包分发，已在 ac7747c 修复并通过干净包复验。
+
+工程版本 ac7747cb096660495f6e41cae09436ec5a645e1a 的 Windows/Linux 云端检查均成功：https://github.com/JingLan0v0/MoonBit/actions/runs/35606815890 ，证据见 verification-engineering-ci.json。后续文档证据提交不改变被测源码。
 
 ## 工具与复现
 
