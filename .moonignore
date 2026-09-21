@@ -8,3 +8,6 @@ output/
 docs/archive/
 scripts/proposal_pdf.py
 *.log
+# Preserve the filtering policy when consumers rebuild/repackage a downloaded zip.
+!/.moonignore
+!/.gitignore

@@ -15,7 +15,7 @@ assert.ifError(p.error);
 assert.equal(p.status, 0, p.stderr || p.stdout);
 // The pinned Moon tool prints its listing on stderr; accept either stream.
 const files = `${p.stdout}\n${p.stderr}`.split(/\r?\n/).map(s => s.trim().replaceAll('\\', '/')).filter(Boolean);
-for (const required of ['moon.mod', 'src/moon.pkg', 'src/model.mbt', 'src/pkg.generated.mbti',
+for (const required of ['.moonignore', '.gitignore', 'moon.mod', 'src/moon.pkg', 'src/model.mbt', 'src/pkg.generated.mbti',
   'src/cmd/main/host.mbt', 'LICENSE', 'NOTICE', 'README.md', 'examples/inventory/before.csv', 'tests/integration.mjs']) {
   assert.ok(files.includes(required), `Missing package file: ${required}`);
 }
