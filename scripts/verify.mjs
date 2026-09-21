@@ -5,5 +5,5 @@ runMoon(['test', '--target', 'js', '--deny-warn']);
 runMoon(['fmt', '--check']);
 runMoon(['info', '--target', 'js']);
 await import('./build.mjs');
-runMoon(['run', 'examples/library_usage', '--target', 'js']);
-await import('./integration.mjs');
+runMoon(['run', 'src/examples/library_usage', '--target', 'js']);
+await import('../tests/integration.mjs');

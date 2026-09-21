@@ -1,6 +1,6 @@
 # MoonBit 库接口
 
-正式公共签名见根目录 `pkg.generated.mbti`，由 `moon info --target js` 生成。
+正式公共签名见`src/pkg.generated.mbti`，由 `moon info --target js` 生成。
 
 ## 调用
 
@@ -10,10 +10,10 @@
 import { "JingLan0v0/moonrow" @moonrow }
 ```
 
-本仓库的 `examples/library_usage` 是独立调用包，实际执行：
+本仓库的 `src/examples/library_usage` 是独立调用包，实际执行：
 
 ```text
-moon run examples/library_usage --target js
+moon run src/examples/library_usage --target js
 ```
 
 当前尚未发布 Mooncakes，不能假定 `moon add JingLan0v0/moonrow` 已经可用。外部使用者可先检出源码，参照这个独立包调用。

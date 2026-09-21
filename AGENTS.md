@@ -12,9 +12,14 @@ states; the progress file and actual repository are current.
 Use `node scripts/verify.mjs` for the complete JS-backend checks. On this Windows
 workspace `scripts/moon.ps1` finds the workspace-local compiler; on normal clones
 install the version in `toolchain.json`. Never commit `.tools`, `_build`, `dist`,
-`artifacts`, account credentials, or real customer CSVs. `output/pdf` contains
-reviewed submission material and may be committed. Keep claims about CI and
+`artifacts`, account credentials, or real customer CSVs. Existing AI-generated
+proposal materials are historical drafts, not valid human-authored submissions.
+Keep claims about CI and
 registration backed by actual results.
+
+Production MoonBit sources and package-local unit tests live under `src/`;
+subprocess tests live under `tests/`. The module source root preserves public
+import paths. Keep the CLI host adapter separate from the command orchestration.
 
 You can browse and install extra skills here:
 <https://github.com/moonbitlang/skills>

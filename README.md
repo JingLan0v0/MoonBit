@@ -81,10 +81,10 @@ node bin/moonrow.cjs --version
 核心包为 `JingLan0v0/moonrow`。独立示例包：
 
 ```text
-moon run examples/library_usage --target js
+moon run src/examples/library_usage --target js
 ```
 
-详细接口见 [API 文档](docs/api.md) 和 [生成的接口](pkg.generated.mbti)，实现取舍见 [架构说明](docs/architecture.md)。目前尚未发布 Mooncakes，不能用未发布的包版本安装。
+详细接口见 [API 文档](docs/api.md) 和 [生成的接口](src/pkg.generated.mbti)，实现取舍见 [架构说明](docs/architecture.md)。目前尚未发布 Mooncakes，不能用未发布的包版本安装。
 
 ## 测试与验收
 

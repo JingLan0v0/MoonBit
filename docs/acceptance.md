@@ -19,10 +19,10 @@
 
 | 要求 | 证据 |
 | --- | --- |
-| MoonBit 主实现 | 根目录 `.mbt`、`cli/args.mbt`、`cmd/main/main.mbt` |
-| 可复用库 | `pkg.generated.mbti`、`examples/library_usage`、`docs/api.md` |
+| MoonBit 主实现 | `src/*.mbt`、`src/cli/args.mbt`、`src/cmd/main/main.mbt` |
+| 可复用库 | `src/pkg.generated.mbti`、`src/examples/library_usage`、`docs/api.md` |
 | 可运行示例 | `examples/catalog`、README 命令、`artifacts/catalog.*` |
-| 必要测试 | `core_test.mbt`、`validation_test.mbt`、`cli/args_test.mbt`、`scripts/integration.mjs` |
+| 必要测试 | `src/core_test.mbt`、`src/validation_test.mbt`、`src/cli/args_test.mbt`、`tests/integration.mjs` |
 | 可复现 | `toolchain.json`、构建/验证脚本、`docs/verification-windows.json` |
 | 可维护和可解释 | `docs/architecture.md`、`limitations.md`、`ai-assistance.md` |
 | 开源合规 | LICENSE、NOTICE、THIRD_PARTY_NOTICES.md |

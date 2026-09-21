@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, writeFileSync, readFileSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { performance } from 'node:perf_hooks';
-import { root } from './toolchain.mjs';
+import { root } from '../scripts/toolchain.mjs';
 
 const artifacts = resolve(root, 'artifacts');
 mkdirSync(artifacts, { recursive: true });

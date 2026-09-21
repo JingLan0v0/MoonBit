@@ -6,15 +6,17 @@
 
 | 文件 | 实际职责 |
 | --- | --- |
-| `model.mbt` | 公共数据类型、限制、诊断与私有 Table 数据 |
-| `csv.mbt` | 四状态 CSV 解析器；原值、物理位置和资源限制 |
-| `diff.mbt` | 表头映射、比较规则、主键索引、差异和结果排序 |
-| `report.mbt` | 文本、JSON、Markdown 和错误输出 |
-| `cli/args.mbt` | 纯参数解释和格式选择 |
-| `cmd/main/main.mbt` | 命令执行；少量 JS FFI 负责系统 I/O |
-| `scripts/` | 构建、验证与独立参考测试，不参与产品算法 |
+| `src/model.mbt` | 公共数据类型、限制、诊断与私有 Table 数据 |
+| `src/csv.mbt` | 四状态 CSV 解析器；原值、物理位置和资源限制 |
+| `src/diff.mbt` | 表头映射、比较规则、主键索引、差异和结果排序 |
+| `src/report.mbt` | 文本、JSON、Markdown 和错误输出 |
+| `src/cli/args.mbt` | 纯参数解释和格式选择 |
+| `src/cmd/main/main.mbt` | 命令编排、诊断和退出码 |
+| `src/cmd/main/host.mbt` | JS FFI：有界文件读取、UTF-8 解码、参数和标准流 |
+| `tests/integration.mjs` | 独立结果对照与真实进程验证 |
+| `scripts/` | 构建、验证与打包，不参与产品算法 |
 
-相对于最初方案，核心模块按文件组织在一个可复用包里，CLI 单独成包。这样让模型和解析/比较代码无需跨包相互依赖，同时保留清晰职责。表校验在 `csv.mbt` 与 `diff.mbt`，没有空的 `table` 包。
+`moon.mod` 使用 `source = "src"`，因此移动物理目录不会改变 `JingLan0v0/moonrow` 公共导入路径。核心模块按文件组织在一个可复用包里，CLI 单独成包，让模型和解析/比较代码无需跨包相互依赖，同时保留清晰职责。MoonBit 单元测试与对应包同目录，进程集成测试在顶层 `tests/`，业务 CSV 样例在顶层 `examples/`。
 
 ## 关键决定
 
