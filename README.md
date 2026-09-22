@@ -6,7 +6,7 @@
 
 MoonRow 是用 MoonBit 编写的可复用数据差异库和离线命令行工具。它按编号对应记录，行列重排不会产生假差异；组合主键、重复键诊断和精确字符串比较让业务差异可以被程序和人工共同复核。
 
-当前版本为 **0.1.0**，支持 **JS 后端**。源码可构建，本地可生成便携包与 Mooncakes 包；**尚未发布到 Mooncakes 或 npm**。
+当前版本为 **0.1.0**，支持 **JS 后端**，已发布到 [Mooncakes](https://mooncakes.io/docs/JingLan0v0/moonrow)；npm 尚未发布。源码可构建，也可生成便携包。
 
 ## 适用场景
 
@@ -111,6 +111,12 @@ node bin/moonrow.cjs examples/catalog/before.csv examples/catalog/after.csv --ke
 
 模块导入路径仍是 `JingLan0v0/moonrow`，`src/` 是物理源码目录，不是导入路径的一部分。
 
+在其他 MoonBit 项目中安装已发布版本：
+
+```sh
+moon add JingLan0v0/moonrow@0.1.0
+```
+
 ```text
 import { "JingLan0v0/moonrow" @moonrow }
 ```
@@ -123,7 +129,7 @@ import { "JingLan0v0/moonrow" @moonrow }
 moon run src/examples/library_usage --target js
 ```
 
-详见 [API 与 JSON 结构](docs/api.md)、[生成接口](src/pkg.generated.mbti)。实际发布前不要执行不存在的 `moon add` 安装；发布步骤见 [发布说明](docs/publishing.md)。
+详见 [API 与 JSON 结构](docs/api.md)、[生成接口](src/pkg.generated.mbti)和[发布验证](docs/publishing.md)。
 
 ## 比较语义与边界
 
@@ -179,4 +185,4 @@ MoonBit 单元测试遵循工具链要求，与被测包同目录；跨进程测
 
 原创实现，采用 [Apache-2.0](LICENSE)；参考来源见 [第三方说明](THIRD_PARTY_NOTICES.md)，AI 使用情况见 [AI 辅助说明](docs/ai-assistance.md)。问题反馈请附最小虚构样例，勿上传真实客户数据。
 
-参赛路径为月度新项目，选题为数据处理。工程通过不代表报名或官方验收通过；**正式申报书须由参赛者人工撰写**，仓库历史 AI 草稿不能替代它。Mooncakes 发布、报名、入群和官方审核仍须完成并留存真实回执。
+参赛路径为月度新项目，选题为数据处理。工程通过不代表官方验收通过；**正式申报书须由参赛者本人撰写、确认并提交**，仓库历史 AI 草稿不能替代它。Mooncakes 0.1.0 已发布，用户已确认完成飞书报名；入群、审核及支持发放仍以赛事方真实回执为准。

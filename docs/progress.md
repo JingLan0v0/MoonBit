@@ -10,6 +10,8 @@
 
 工程版本 ac7747cb096660495f6e41cae09436ec5a645e1a 的 Windows/Linux 云端检查均成功：https://github.com/JingLan0v0/MoonBit/actions/runs/35606815890 ，证据见 verification-engineering-ci.json。后续文档证据提交不改变被测源码。
 
+2026-09-22 发布完成：使用 GitHub 注册并登录 Mooncakes，账号为 `JingLan0v0`；`moon publish --dry-run` 通过，`moon publish` 返回 200 OK。公开注册表可查询 `JingLan0v0/moonrow@0.1.0`，校验和为 `41c2362ecdaf022cf7a0d3534744f32d7a60bd0c512e1c3d79d7dfe564048368`。全新项目通过固定版本安装、JS 检查及公共 API 调用，证据见 verification-registry.json。用户已确认完成飞书报名。
+
 ## 工具与复现
 
 Node.js 24.14.0、MoonBit 0.10.14+7d59c7ec9，工作区上级 .tools/moon 为已校验工具链。没有修改全局 PATH。入口 node scripts/verify.mjs；生成 artifacts/integration-results.json、artifacts/package-check.json 和 _build/publish 包。node scripts/build.mjs 构建 dist/moonrow.cjs。交付由 scripts/package.ps1 从干净 Git 提交生成。
@@ -18,11 +20,11 @@ Node.js 24.14.0、MoonBit 0.10.14+7d59c7ec9，工作区上级 .tools/moon 为已
 
 本轮已读取官网链接的正式章程和实际表单，详见 competition.md。此前“无法读取、Mooncakes 可能不是必需”的记录已经过时。
 
-- 必须发布到 Mooncakes；用户本轮明确尚未注册/登录。当前只完成本地打包验证，未发布。
+- Mooncakes 发布要求已完成；0.1.0 已公开并通过全新项目安装验证。后续版本不得重复使用 0.1.0。
 - 正式申报书必须由参赛者人工撰写、Markdown、一页以内，并包含至少三个完整场景。原 AI 生成 Markdown/PDF 已移入 docs/archive 并排除注册表包，不能直接提交。
 - 仓库要求不少于 10 个有效提交，不得凑数。当前真实提交数量用 git rev-list --count HEAD 查看，有效性仍由主办方审核。
 - 官网和表单为 9 月 30 日，章程仍写 9 月 24 日，并指向赛事群口径。未确认前按较早时间准备，旧计划 9 月 28 日不可继续依赖。
-- 报名、入群、个人证明、人工申报书、参赛者实际理解、官方回执和到账均未确认。个人材料不要进入公开仓库。
+- 用户已确认完成飞书报名；入群、参赛者实际理解、官方审核回执和到账仍未确认。个人材料不要进入公开仓库。
 
 ## 历史实证
 
@@ -34,4 +36,4 @@ Node.js 24.14.0、MoonBit 0.10.14+7d59c7ec9，工作区上级 .tools/moon 为已
 
 ## 恢复顺序
 
-先读本文件、competition.md、README，检查 git status、最新提交与真实 CI；完成缺失的本地/远程验证，再协助用户登录发布和按官方要求报名。不要继续生成可冒充人工申报的文本，也不要把模板当作真实 Issues/PR 记录。
+先读本文件、competition.md、README，检查 git status、最新提交、真实 CI 和 Mooncakes 公开版本；再处理赛事群、审核反馈或后续发布。不要重复发布 0.1.0，也不要把模板当作真实 Issues/PR 记录。

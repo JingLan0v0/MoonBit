@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-09-22",
+  "source_commit": "717cc43d8dcf7bb48ca6b04a2c2fbaf9ed6ff100",
+  "registry_url": "https://mooncakes.io/docs/JingLan0v0/moonrow",
+  "module": "JingLan0v0/moonrow",
+  "version": "0.1.0",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/JingLan0v0/MoonBit",
+  "checksum": "41c2362ecdaf022cf7a0d3534744f32d7a60bd0c512e1c3d79d7dfe564048368",
+  "published_at": "2026-09-22T06:25:27.961966+00:00",
+  "publish_response": "200 OK",
+  "fresh_consumer": {
+    "install": "moon add JingLan0v0/moonrow@0.1.0",
+    "check": "moon check --target js",
+    "run": "moon run cmd/main --target js",
+    "result": "success",
+    "observed_summary": {
+      "before_rows": 1,
+      "after_rows": 1,
+      "changed": 1,
+      "changed_cells": 1,
+      "has_diff": true
+    }
+  }
+}

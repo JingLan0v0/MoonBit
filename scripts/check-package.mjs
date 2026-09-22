@@ -29,4 +29,4 @@ writeFileSync(resolve(root, 'artifacts/package-check.json'), JSON.stringify({
   checked_at: new Date().toISOString(), version, passed: true,
   scope: 'Local package contents and version consistency; not a registry publication',
 }, null, 2) + '\n');
-console.log('Mooncakes package preflight passed (local only; not published).');
+console.log('Mooncakes package preflight passed (this command does not publish).');

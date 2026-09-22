@@ -10,6 +10,7 @@ MoonRow 的 CSV 状态机、校验、组合键编码、差异计算与报告实�
 | RFC 4180 | CSV 语法背景参考 | 规范参考，未复制规范正文；https://www.rfc-editor.org/info/rfc4180/ |
 | simonw/csv-diff | 主键比较使用场景调研 | Apache-2.0 项目；未复制代码；https://github.com/simonw/csv-diff |
 | MoonVerity | MoonBit 同类生态调研 | 未引入为依赖；https://mooncakes.io/docs/Wchwch777/moonverity |
+| CJR-zhang/mbitsv | MoonBit 分隔文本与主键 diff 生态调研 | MIT；未引入为依赖，未复制或移植代码；https://github.com/CJR-zhang/mbitsv |
 
 生成产物包含由 MoonBit 标准库编译而来的代码，交付包应保留本文件、LICENSE 及 NOTICE。编译器和标准库安装文件位于工作区 `.tools`，不加入项目源码仓库或产品交付包。
 

@@ -16,7 +16,7 @@ import { "JingLan0v0/moonrow" @moonrow }
 moon run src/examples/library_usage --target js
 ```
 
-当前尚未发布 Mooncakes，不能假定 `moon add JingLan0v0/moonrow` 已经可用。外部使用者可先检出源码，参照这个独立包调用。
+版本 0.1.0 已发布到 Mooncakes。外部使用者可执行 `moon add JingLan0v0/moonrow@0.1.0`，再按上述方式导入；该安装方式已经在全新项目中验证。
 
 ## 核心接口
 

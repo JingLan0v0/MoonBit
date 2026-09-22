@@ -2,7 +2,7 @@
 
 ## 状态
 
-2026-09-21：Windows 本地与干净目录复现全部通过，公开仓库已同步，Linux / Windows 远程 CI 均已通过。工程已具备验收演示条件；这不是主办方的通过证明。章程已读取；Mooncakes 发布、人工申报书、报名、入群和官方验收尚需完成或确认。
+2026-09-22：Windows 本地与干净目录复现全部通过，公开仓库已同步，Linux / Windows 远程 CI 均已通过。`JingLan0v0/moonrow@0.1.0` 已发布到 Mooncakes，并在全新项目完成安装、检查和公共 API 调用。用户已确认完成飞书报名；入群、资格审核和官方验收仍需确认。这不是主办方的通过证明。
 
 最新远程验证：[GitHub Actions](https://github.com/JingLan0v0/MoonBit/actions/runs/35606815890) 和 [结果快照](verification-engineering-ci.json)，对应 ac7747c，Windows/Linux 均成功。独立解压 Mooncakes 本地包后完整验证通过，见 [干净包证据](verification-engineering-windows.json)。后续证据文档提交不改变被测源码；旧版本结果仍保留在 verification-ci.json。
 
@@ -26,9 +26,10 @@
 | 可复现 | `toolchain.json`、构建/验证脚本、`docs/verification-windows.json` |
 | 可维护和可解释 | `docs/architecture.md`、`limitations.md`、`ai-assistance.md` |
 | 开源合规 | LICENSE、NOTICE、THIRD_PARTY_NOTICES.md |
+| Mooncakes 发布 | [公开包](https://mooncakes.io/docs/JingLan0v0/moonrow)、`verification-registry.json`、全新项目安装与 API 调用成功 |
 | 过程记录 | 本地与远程均保留真实阶段 commits、CHANGELOG |
 | 公开仓库/Issues/PR | 仓库已公开，主代码已同步；后续实际需求和缺陷再形成 Issues/PR，不伪造历史 |
-| 申报/入群/支持 | 需要实际回执和用户确认，不能从代码推定 |
+| 申报/入群/支持 | 用户确认已提交飞书报名；入群、审核和发放仍需实际回执，不能从代码推定 |
 
 ## 五分钟演示
 
@@ -41,4 +42,4 @@
 
 ## 本期仍待核实
 
-本轮确认 Mooncakes 发布、人工撰写的一页 Markdown、至少三个场景、不少于 10 个有效提交为要求。日期存在主页/表单 9 月 30 日与章程 9 月 24 日冲突，须以赛事群确认；最终验收入口和补件安排也待通知。详见 `competition.md`。
+Mooncakes 发布、至少三个场景和不少于 10 个有效提交均已有对应证据。日期存在主页/表单 9 月 30 日与章程 9 月 24 日冲突，仍须以赛事群确认；最终验收入口、资格审核和补件安排也待通知。详见 `competition.md`。
